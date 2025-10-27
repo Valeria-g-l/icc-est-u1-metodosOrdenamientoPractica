@@ -20,6 +20,21 @@ public class View {
 
     }
 
+    public void showOrder(){
+        System.out.println("\n--Seleccione el orden");
+        System.out.println("1-> Ascendente");
+        System.out.println("2-> Descendente");
+        System.out.println("Seleccione la opcion");
+        
+    }
+    
+    public void showPasosMenu(){
+         System.out.println("\n--Quiere ver los pasos");
+        System.out.println("1-> Si");
+        System.out.println("2-> No");
+        System.out.println("Seleccione la opcion");
+    }
+
     public int inputOption(int max){
         int option = -1;
         while(true){
