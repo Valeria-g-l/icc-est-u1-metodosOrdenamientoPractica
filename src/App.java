@@ -1,44 +1,50 @@
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         View view = new View();
-        view.showMenu();
-        
-        int[ ] numeros = new int[] {1,2,3,4,4};
+        int[] original = {19, 24, -19, -28, 5, 30, -12, 34, -9, 52, 0, 45};
+
         while (true) {
             view.showMenu();
             int option = view.inputOption(4);
 
-            view.showOrder();
-            int orden = view.inputOption(2);
-            boolean ordenOpt = orden == 1;
-            view.showPasosMenu();
-            int pasos = view.inputOption(2);
-                  
+            if (option == 4) {
+                System.out.println("Adiós");
+                break;
+            }
+
+            boolean mostrarPasos = view.inputBoolean("¿Desea ver los pasos? (true/false): ");
+            boolean ascendente = view.inputOrdenAD("¿Desea ordenar ascendentemente (A) o descendentemente (D)?: ");
+
+
+            int[] arreglo = original.clone();
 
             switch (option) {
                 case 1:
-                    System.out.println("Metodo Seleccion");
+                    System.out.println("Método Selección");
                     SortSelection sortSelection = new SortSelection();
-                    sortSelection.sort(numeros, orden, pasos);
+                    sortSelection.sort(arreglo, ascendente, mostrarPasos);
                     break;
 
                 case 2:
-                    System.out.println("Metodo Insercion");
+                    System.out.println("Método Inserción");
                     SortInsertion sortInsertion = new SortInsertion();
-                    sortInsertion.sort(numeros, orden, pasos);
+                    int[] resultadosInsercion = sortInsertion.sort(arreglo, ascendente, mostrarPasos);
+                    System.out.println("Comparaciones: " + resultadosInsercion[0] + " Cambios: " + resultadosInsercion[1]);
                     break;
+
                 case 3:
-                    System.out.println("Metodo Burbuja");
-                    break;
-                case 4:
-                    System.out.println("Adios");
-                    System.exit(option);
-                    break;
-            
-                default:
+                    System.out.println("Método Burbuja Mejorado");
+                    SortBubleMejorado sortBuble = new SortBubleMejorado();
+                    int[] resultadosBurbuja = sortBuble.sort(arreglo, ascendente, mostrarPasos);
+                    System.out.println("Comparaciones: " + resultadosBurbuja[0] + " Cambios: " + resultadosBurbuja[1]);
                     break;
             }
+
+            System.out.print("Arreglo ordenado: ");
+            for (int num : arreglo) {
+                System.out.print(num + " ");
+            }
+            System.out.println("\n");
         }
-      
     }
 }
